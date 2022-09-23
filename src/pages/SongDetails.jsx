@@ -26,6 +26,7 @@ const SongDetails = () => {
     return <Loader title='Searching song details' />;
 
   console.log(songData);
+  console.log(data);
 
   if (error) return <Error />;
 
