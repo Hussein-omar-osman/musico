@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import TopSkeleton from './TopSkeleton';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode } from 'swiper';
 
@@ -33,7 +34,7 @@ const TopChartCard = ({
       />
       <div className='flex-1 flex flex-col justify-center mx-3'>
         <Link to={`/songs/${song.key}`}>
-          <p className='text-xl font-bold text-white'>{song?.title}</p>
+          <p className='text-xl font-bold text-white truncate'>{song?.title}</p>
         </Link>
         <Link to={`/artists/${song?.artists[0].adamid}`}>
           <p className='text-base text-gray-300 mt-1'>{song?.subtitle}</p>
@@ -53,7 +54,7 @@ const TopChartCard = ({
 const TopPlay = () => {
   const dispatch = useDispatch();
   const { activeSong, isPlaying } = useSelector((state) => state.player);
-  const { data } = useGetTopChartsQuery();
+  const { data, isFetching } = useGetTopChartsQuery();
   const divRef = useRef(null);
 
   useEffect(() => {
@@ -71,10 +72,12 @@ const TopPlay = () => {
     dispatch(playPause(true));
   };
 
+  if (isFetching) return <TopSkeleton divRef={divRef} />;
+
   return (
     <div
       ref={divRef}
-      className='xl:ml-6 ml-0 xl:mb-0 mb-6 flex-1 xl:max-w-[450px] max-w-full flex flex-col'
+      className='xl:ml-6 ml-0 xl:mb-0 mb-6 flex-1 xl:max-w-[430px] max-w-full flex flex-col'
     >
       <div className='w-full flex flex-col mt-7'>
         <div className='flex flex-row justify-between items-center'>
