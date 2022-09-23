@@ -8,8 +8,9 @@ import { useGetSongsBySearchQuery } from '../redux/services/shazamCore';
 const Search = () => {
   const { searchTerm } = useParams();
   const { activeSong, isPlaying } = useSelector((state) => state.player);
-  const { data, isFetching, error } = useGetSongsBySearchQuery(searchTerm);
-
+  const validated = searchTerm == '' ? 'all' : searchTerm;
+  const { data, isFetching, error } = useGetSongsBySearchQuery(validated);
+  console.log(searchTerm, validated);
   const songs = data?.tracks?.hits.map((song) => song.track);
 
   if (isFetching) return <Loader title={`Searching ${searchTerm}...`} />;
