@@ -1,21 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { searchSvg } from '../assets';
 
-import { Error, Loader, SongCard } from '../components';
+import { Error, SongCard } from '../components';
+import CardsSkeleton from '../components/CardsSkeleton';
 import { useGetSongsBySearchQuery } from '../redux/services/shazamCore';
-
-// const EmptySearchTerm = () => {
-//   return (
-//     <div className='flex flex-col justify-center mx-auto'>
-//       <h2 className='font-bold text-3xl text-white text-left mt-4 mb-10'>
-//         Search Songs & Artists
-//       </h2>
-//       <img src={searchSvg} alt='search' height={450} width={450} />
-//     </div>
-//   );
-// };
 
 const Search = () => {
   const { searchTerm } = useParams();
@@ -25,10 +14,6 @@ const Search = () => {
   console.log(searchTerm);
   const songs = data?.tracks?.hits.map((song) => song.track);
 
-  // if (searchTerm == 'searchTerm') return <EmptySearchTerm />;
-
-  if (isFetching) return <Loader title={`Searching ${searchTerm}...`} />;
-
   if (error) return <Error />;
 
   return (
@@ -36,9 +21,9 @@ const Search = () => {
       <h2 className='font-bold text-3xl text-white text-left mt-4 mb-10'>
         Showing results for <span className='font-black'>{searchTerm}</span>
       </h2>
-
+      {isFetching && <CardsSkeleton />}
       <div className='flex flex-wrap sm:justify-start justify-center gap-8'>
-        {songs.map((song, i) => (
+        {songs?.map((song, i) => (
           <SongCard
             key={song.key}
             song={song}

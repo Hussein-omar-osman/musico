@@ -6,7 +6,6 @@ import { FiSearch } from 'react-icons/fi';
 const Searchbar = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
-  // const validated = searchTerm == '' ? 'searchTerm' : searchTerm;
   const handleSubmit = (e) => {
     e.preventDefault();
 

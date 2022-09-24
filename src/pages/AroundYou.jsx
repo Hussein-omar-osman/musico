@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 
-import { Error, Loader, SongCard } from '../components';
+import { Error, SongCard } from '../components';
 import { useGetSongsByCountryQuery } from '../redux/services/shazamCore';
 import CardsSkeleton from '../components/CardsSkeleton';
 
@@ -33,10 +33,6 @@ const CountryTracks = () => {
   const { data, isFetching, error } = useGetSongsByCountryQuery(
     getCorrectCountry(country)
   );
-  console.log(data);
-
-  // if (isFetching && loading)
-  //   return <Loader title='Loading Songs around you...' />;
 
   if (error && country !== '') return <Error />;
 

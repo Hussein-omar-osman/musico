@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Error, Loader, SongCard } from '../components';
+import { Error, SongCard } from '../components';
 import { selectGenreListId } from '../redux/features/playerSlice';
 import { useGetSongsByGenreQuery } from '../redux/services/shazamCore';
 import { genres } from '../assets/constants';
@@ -14,9 +14,6 @@ const Discover = () => {
   const { data, isFetching, error } = useGetSongsByGenreQuery(
     genreListId || 'POP'
   );
-  console.log(data);
-
-  // if (isFetching) return <Loader title='Loading songs...' />;
 
   if (error) return <Error />;
 
