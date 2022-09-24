@@ -16,7 +16,7 @@ const TopSkeleton = ({ divRef }) => {
         </div>
 
         <div className='mt-4 flex flex-col gap-1'>
-          {[1, 2, 3, 4, 5].map((item, i) => (
+          {[1, 2, 3, 4].map((item, i) => (
             <div
               className={`w-full flex flex-row items-center hover:bg-[#4c426e] py-2 p-4 rounded-lg cursor-pointer mb-2`}
               key={i}
