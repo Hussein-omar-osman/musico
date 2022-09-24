@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { Error, Loader, SongCard } from '../components';
 import { useGetSongsByCountryQuery } from '../redux/services/shazamCore';
+import CardsSkeleton from '../components/CardsSkeleton';
 
 const CountryTracks = () => {
   const [country, setCountry] = useState('');
@@ -34,8 +35,8 @@ const CountryTracks = () => {
   );
   console.log(data);
 
-  if (isFetching && loading)
-    return <Loader title='Loading Songs around you...' />;
+  // if (isFetching && loading)
+  //   return <Loader title='Loading Songs around you...' />;
 
   if (error && country !== '') return <Error />;
 
@@ -44,7 +45,7 @@ const CountryTracks = () => {
       <h2 className='font-bold text-3xl text-white text-left mt-4 mb-10'>
         Around you <span className='font-black'>{country}</span>
       </h2>
-
+      {isFetching && loading && <CardsSkeleton />}
       <div className='flex flex-wrap sm:justify-start justify-center gap-8'>
         {data?.map((song, i) => (
           <SongCard

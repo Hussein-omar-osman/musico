@@ -5,6 +5,7 @@ import { Error, Loader, SongCard } from '../components';
 import { selectGenreListId } from '../redux/features/playerSlice';
 import { useGetSongsByGenreQuery } from '../redux/services/shazamCore';
 import { genres } from '../assets/constants';
+import CardsSkeleton from '../components/CardsSkeleton';
 
 const Discover = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const Discover = () => {
   );
   console.log(data);
 
-  if (isFetching) return <Loader title='Loading songs...' />;
+  // if (isFetching) return <Loader title='Loading songs...' />;
 
   if (error) return <Error />;
 
@@ -41,6 +42,7 @@ const Discover = () => {
         </select>
       </div>
 
+      {isFetching && <CardsSkeleton />}
       <div className='flex flex-wrap sm:justify-start justify-center gap-8'>
         {data?.map((song, i) => (
           <SongCard
