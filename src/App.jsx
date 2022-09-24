@@ -27,7 +27,7 @@ const App = () => {
           <div className='px-6 h-[calc(100vh-72px)] overflow-y-scroll hide-scrollbar flex xl:flex-row flex-col-reverse'>
             <div className='flex-1 h-fit pb-40'>
               <Routes>
-                <Route path='/' element={<Discover />} />
+                <Route path='/' index element={<Discover />} />
                 <Route path='/top-artists' element={<TopArtists />} />
                 <Route path='/top-charts' element={<TopCharts />} />
                 <Route path='/around-you' element={<AroundYou />} />
@@ -37,9 +37,11 @@ const App = () => {
                 <Route path='/search' element={<EmptySearchTerm />} />
               </Routes>
             </div>
-            <div className='xl:sticky relative top-0 h-fit'>
-              <TopPlay />
-            </div>
+            {window.innerWidth > 600 && (
+              <div className='xl:sticky relative top-0 h-fit'>
+                <TopPlay />
+              </div>
+            )}
           </div>
         </div>
 
