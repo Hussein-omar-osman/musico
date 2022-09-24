@@ -12,6 +12,7 @@ import {
   SongDetails,
   TopCharts,
 } from './pages';
+import EmptySearchTerm from './pages/EmptySearch';
 
 const App = () => {
   const { activeSong } = useSelector((state) => state.player);
@@ -33,6 +34,7 @@ const App = () => {
                 <Route path='/artists/:name/:id' element={<ArtistDetails />} />
                 <Route path='/songs/:songid' element={<SongDetails />} />
                 <Route path='/search/:searchTerm' element={<Search />} />
+                <Route path='/search' element={<EmptySearchTerm />} />
               </Routes>
             </div>
             <div className='xl:sticky relative top-0 h-fit'>

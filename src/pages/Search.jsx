@@ -1,17 +1,31 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { searchSvg } from '../assets';
 
 import { Error, Loader, SongCard } from '../components';
 import { useGetSongsBySearchQuery } from '../redux/services/shazamCore';
 
+// const EmptySearchTerm = () => {
+//   return (
+//     <div className='flex flex-col justify-center mx-auto'>
+//       <h2 className='font-bold text-3xl text-white text-left mt-4 mb-10'>
+//         Search Songs & Artists
+//       </h2>
+//       <img src={searchSvg} alt='search' height={450} width={450} />
+//     </div>
+//   );
+// };
+
 const Search = () => {
   const { searchTerm } = useParams();
+
   const { activeSong, isPlaying } = useSelector((state) => state.player);
-  const validated = searchTerm == '' ? 'all' : searchTerm;
-  const { data, isFetching, error } = useGetSongsBySearchQuery(validated);
-  console.log(searchTerm, validated);
+  const { data, isFetching, error } = useGetSongsBySearchQuery(searchTerm);
+  console.log(searchTerm);
   const songs = data?.tracks?.hits.map((song) => song.track);
+
+  // if (searchTerm == 'searchTerm') return <EmptySearchTerm />;
 
   if (isFetching) return <Loader title={`Searching ${searchTerm}...`} />;
 
